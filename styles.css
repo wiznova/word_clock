@@ -41,6 +41,12 @@
     box-shadow: 0 1px 0;
 }
 
+@media (max-width: 1080px) {
+    .watchface-container {
+        height: 70vw;
+        width: 70vw;
+    }
+
 @media (max-width: 800px) {
     .watchface-container {
         height: 80vw;
