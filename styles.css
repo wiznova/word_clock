@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
+}
+
+.watchface-container {
+    background-image: linear-gradient(90deg, #355C7D, #6C5B7B, #C06C84);
+    width: 30rem;
+    height: 30rem;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-gap: 1rem;
+    padding: 3rem;
+}
+
+.letter {
+    font-size: 1.5rem;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.current {
+    color: white;
+}
