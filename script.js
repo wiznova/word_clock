@@ -59,8 +59,8 @@ function displayFromList(wordList) {
     clearStyles();
     wordList.forEach(el => {
         let w = document.getElementsByClassName(el);
-        if (el === "to" || el === "past")
-            isMinutes = false;  
+        if (el === "to" || el === "past" || el === "oclock")
+            isMinutes = false;
 
         for (let l of w){
             if (isMinutes){
@@ -97,7 +97,7 @@ function currentTimeToString(now = new Date()){
     if (!past)
         hRem = (h + 1) % 12;
     if (mRem === 0 && m !== 6){
-        ret += hours[hRem] + " oclock";
+        ret += "oclock " + hours[hRem];
         return ret;
     }
 
