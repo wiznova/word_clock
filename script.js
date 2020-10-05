@@ -13,7 +13,7 @@ const words = [
     "PAST", "eru", "NINE",
     "ONE", "SIX", "THREE",
     "FOUR", "FIVE", "TWO",
-    "EIGTH", "ELEVEN", 
+    "EIGHT", "ELEVEN", 
     "SEVEN", "TWELVE",
     "TEN", "se", "OCLOCK",
 ]
@@ -110,24 +110,49 @@ function currentTimeToString(now = new Date()){
     return ret;
 }
 
-        
+function testTimeToString(){
+    // Logs all possible strings in 24h period to console;
+
+    let ms = 1601900775251;
+    for (let i = 0; i < 24 * 60 * 60 * 1000; i += 1000 * 60){
+        let dt = new Date(ms + i);
+        console.log(dt.toString().split(" ").slice(4, 5)[0], currentTimeToString(dt));
+    }
+}
+
+// Bottom links:
+let linkData = {
+    "00:30am": _ => displayFromList("it is am half past twelve".split(" ")),
+    "11:55am": _ => displayFromList("it is am five to twelve".split(" ")),
+    "current time": _ =>  displayFromList(currentTimeToString().split(' ')),
+    "03:30pm": _ => displayFromList("it is pm half past three".split(" ")),
+    "09:50pm": _ => displayFromList("it is pm ten to ten".split(" ")),
+}
+
+function btnStylePress(btnObj, btnList){
+    for (let j = 0; j < btnList.length; j++){
+        if (btnList[j].classList.value.includes("pressed"))
+            btnList[j].classList.remove("pressed");
+    }
+    btnObj.classList.add("pressed");
+}
+
+let linkObjs = document.getElementsByClassName("link");
+let i = 0;
+for (let el in linkData){
+    linkObjs[i].innerHTML = el;
+    linkObjs[i].addEventListener('click', (event) => {
+        btnStylePress(event.target, linkObjs);
+        linkData[el]();
+    });
+    i++;
+}
 
 let strDate = currentTimeToString();
+let ct = document.getElementById("ct");
 displayFromList(strDate.split(' '));
-setInterval(_ => { 
-    let newStrDate = currentTimeToString();
-    if (strDate !== newStrDate){
-        strDate = newStrDate;
-        displayFromList(strDate.split(' ')); 
-    }
-}, 1000 * 60 * 3);
-
-// function testTimeToString(){
-//     // Logs all possible strings in 24h period to console;
-//
-//     let ms = 1601900775251;
-//     for (let i = 0; i < 24 * 60 * 60 * 1000; i += 1000 * 60){
-//         let dt = new Date(ms + i);
-//         console.log(dt.toString().split(" ").slice(4, 5)[0], currentTimeToString(dt));
-//     }
-// }
+let timer = setInterval( _ => { 
+    strDate = currentTimeToString();
+    displayFromList(strDate.split(' '));
+    btnStylePress(ct, linkObjs);
+}, 1000 * 60);

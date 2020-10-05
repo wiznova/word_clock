@@ -3,19 +3,33 @@
     padding: 0;
 }
 
+:root {
+    --watchface-width: min(60vw, 700px);
+    --watchface-height: min(60vw, 700px);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: #FFF8DC;
+    font-family: 'Major Mono Display', monospace;
+}
+
 .container {
+    height: 100%;
     display: grid;
-    height: 100vh;
     align-items: center;
     justify-items: center;
-    background-color: #FFF8DC;
 }
 
 .watchface-container {
     font-family: 'Major Mono Display', monospace;
     background-image: linear-gradient(90deg, #355C7D, #6C5B7B, #C06C84);
-    height: 60vw;
-    width: 60vw;
+    height: var(--watchface-height);
+    width: var(--watchface-width);
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     grid-gap: 1rem;
@@ -41,18 +55,67 @@
     box-shadow: 0 1px 0;
 }
 
+.link-div {
+    position: relative;
+    bottom: 50px;
+    width: var(--watchface-width);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+}
+
+.link {
+	display: inline-block;
+    margin: 0;
+    padding: 0.75rem 1rem;
+	border: 0;
+	border-radius: 0.317rem;
+	background-color: #aaa;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 0.8rem;
+	cursor: pointer;
+	-webkit-appearance: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+.link:hover {
+	opacity: 0.85;
+}
+
+.link:active {
+	box-shadow: inset 0 3px 4px hsla(0, 0%, 0%, 0.2);
+}
+
+.pressed {
+    background-color: black;
+}
+
 @media (max-width: 1080px) {
-    .watchface-container {
-        height: 70vw;
-        width: 70vw;
+    :root {
+        --watchface-width: 70vw;
+        --watchface-height: 70vw;
     }
 
 @media (max-width: 800px) {
-    .watchface-container {
-        height: 80vw;
-        width: 80vw;
+    :root {
+        --watchface-width: 80vw;
+        --watchface-height: 80vw;
     }
     .letter {
         font-size: 1.5rem;
+    }
+    .link-div {
+        width: 95%;
+    }
+    .link {
+        font-size: 0.6rem;
+        padding: 0.5rem 0.75rem;
     }
   }
